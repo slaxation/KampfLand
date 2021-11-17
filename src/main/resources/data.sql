@@ -1,0 +1,14 @@
+INSERT into obchod (nazov_obchodu) values ('KampfLand');
+INSERT into obchod (nazov_obchodu) values ('Tesco');
+INSERT into obchod (nazov_obchodu) values ('Billa');
+INSERT into prevadzka (adresa,otv_hodiny,zatv_hodiny,obchod_id) values ('Konevova 1', '10:30', '16:30',1);
+INSERT into prevadzka (adresa,otv_hodiny,zatv_hodiny,obchod_id) values ('Tulska 3', '10:30', '18:30',2);
+INSERT into prevadzka (adresa,otv_hodiny,zatv_hodiny,obchod_id) values ('Mrdka 2', '10:30', '16:30',3);
+INSERT into prevadzka (adresa,otv_hodiny,zatv_hodiny,obchod_id) values ('Kys 14', '10:00', '16:30',1);
+INSERT into tovar (nazov, category, prevadzka_id) values ('Jameson', 'ALKOHOL', 4);
+INSERT into tovar (nazov, category, prevadzka_id) values ('Rozek', 'PECIVO', 1);
+INSERT into tovar (nazov, category, prevadzka_id) values ('Mila', 'SLADKE', 2);
+INSERT into tovar (nazov, category, prevadzka_id) values ('Slovakia', 'SLANE', 3);
+INSERT into tovar (nazov, category, prevadzka_id) values ('Kofola', 'NEALKO', 4);
+INSERT into tovar (nazov, category, prevadzka_id) values ('Lina', 'SLADKE', 2);
+INSERT into tovar (nazov, category, prevadzka_id) values ('DRU', 'SLANE', 4);
