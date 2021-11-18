@@ -1,4 +1,7 @@
 package slaxation.KampfLand.repositories;
 
-public interface TovarRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import slaxation.KampfLand.domain.Tovar;
+
+public interface TovarRepository extends JpaRepository<Tovar, Integer> {
 }
