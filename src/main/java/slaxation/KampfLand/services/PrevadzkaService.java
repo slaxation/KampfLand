@@ -9,5 +9,5 @@ public interface PrevadzkaService {
 
     Set<Tovar> getTovaryByPrevId(Integer previd);
 
-    Set<Prevadzka> getPrevadzkyByObchodId(Integer id);
+
 }
