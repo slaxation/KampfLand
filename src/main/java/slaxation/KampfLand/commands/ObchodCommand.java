@@ -7,20 +7,25 @@ import java.util.Set;
 
 public class ObchodCommand {
 
-    private int id;
+    private int obchod_id;
     private String nazov;
-    private Set<Prevadzka> prevadzky = new HashSet<>();
+    private Set<PrevadzkaCommand> prevadzky = new HashSet<>();
 
     public ObchodCommand() {
-
     }
 
-    public int getId() {
-        return id;
+    public ObchodCommand(int id, String nazov, Set<PrevadzkaCommand> prevadzky) {
+        this.obchod_id = id;
+        this.nazov = nazov;
+        this.prevadzky = prevadzky;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getObchod_id() {
+        return obchod_id;
+    }
+
+    public void setObchod_id(int id) {
+        this.obchod_id = id;
     }
 
     public String getNazov() {
@@ -31,11 +36,11 @@ public class ObchodCommand {
         this.nazov = nazov;
     }
 
-    public Set<Prevadzka> getPrevadzky() {
+    public Set<PrevadzkaCommand> getPrevadzky() {
         return prevadzky;
     }
 
-    public void setPrevadzky(Set<Prevadzka> prevadzky) {
+    public void setPrevadzky(Set<PrevadzkaCommand> prevadzky) {
         this.prevadzky = prevadzky;
     }
 }

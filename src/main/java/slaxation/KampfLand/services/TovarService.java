@@ -2,14 +2,16 @@ package slaxation.KampfLand.services;
 
 import slaxation.KampfLand.commands.TovarCommand;
 import slaxation.KampfLand.domain.Tovar;
+import slaxation.KampfLand.exceptions.NotEnoughException;
 
 import java.util.Set;
 
 public interface TovarService {
 
-    TovarCommand findByPrevadzkaIdAndTovarName(int prevadzkaId, String tovarName);
 
-    TovarCommand saveTovarCommand(TovarCommand command);
+    void znizMnozstvoTovaru(TovarCommand command, int mnozstvo) throws NotEnoughException;
+
+    void zvysMnozstvoTovaru(TovarCommand command, int mnozstvo);
 
 
 

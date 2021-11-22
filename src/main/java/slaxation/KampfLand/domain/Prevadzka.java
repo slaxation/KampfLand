@@ -30,6 +30,10 @@ public class Prevadzka {
     private Set<Tovar> tovary;
 
 
+    public Prevadzka(){
+
+    }
+
     public Prevadzka(String adresa, Time otvHodiny, Time zatvHodiny, Obchod obchod, Set<Tovar> tovary) {
         this.adresa = adresa;
         this.otvHodiny = otvHodiny;
@@ -68,6 +72,8 @@ public class Prevadzka {
         return previd;
     }
 
+    public void setPrevid(int id) { this.previd = id; }
+
     public String getAdresa() {
         return adresa;
     }
@@ -92,6 +98,9 @@ public class Prevadzka {
         this.zatvHodiny = zatvHodiny;
     }
 
+    public Obchod getObchod() {return obchod;}
+
+    public void setObchod(Obchod obchod) {this.obchod = obchod;}
 
     public Set<Tovar> getTovary() {
         return tovary;

@@ -1,12 +1,9 @@
 package slaxation.KampfLand.commands;
 
 import slaxation.KampfLand.domain.Obchod;
-import slaxation.KampfLand.domain.Tovar;
 
-import javax.persistence.*;
 import java.sql.Time;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class PrevadzkaCommand {
@@ -15,12 +12,21 @@ public class PrevadzkaCommand {
     private String adresa;
     private Time otvHodiny;
     private Time zatvHodiny;
-    private int obchodId;
+    private Obchod obchod;
     private Set<TovarCommand> tovary = new HashSet<>();
 
 
     public PrevadzkaCommand() {
 
+    }
+
+    public PrevadzkaCommand(int previd, String adresa, Time otvHodiny, Time zatvHodiny, Obchod obchod, Set<TovarCommand> tovary) {
+        this.previd = previd;
+        this.adresa = adresa;
+        this.otvHodiny = otvHodiny;
+        this.zatvHodiny = zatvHodiny;
+        this.obchod = obchod;
+        this.tovary = tovary;
     }
 
     public int getPrevid() {
@@ -56,12 +62,12 @@ public class PrevadzkaCommand {
     }
 
 
-    public int getObchodId() {
-        return obchodId;
+    public Obchod getObchod() {
+        return obchod;
     }
 
-    public void setObchodId(int obchodId) {
-        this.obchodId = obchodId;
+    public void setObchod(Obchod obchod) {
+        this.obchod = obchod;
     }
 
     public Set<TovarCommand> getTovary() {

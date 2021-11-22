@@ -17,6 +17,9 @@ public class Obchod {
     @OneToMany(mappedBy = "obchod")
     private Set<Prevadzka> prevadzky;
 
+    public Obchod(){
+    }
+
     public Obchod(String nazov, Set<Prevadzka> prevadzky) {
         this.nazov = nazov;
         this.prevadzky = prevadzky;

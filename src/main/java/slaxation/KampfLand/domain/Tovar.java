@@ -1,6 +1,7 @@
 package slaxation.KampfLand.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "tovar")
@@ -22,8 +23,14 @@ public class Tovar {
     @JoinColumn(name = "prev_id", nullable = false)
     private Prevadzka prevadzka;
 
+    @Min(0)
     @Column(name = "mnozstvo")
     private int mnozstvo;
+
+
+    public Tovar(){
+
+    }
 
     public Tovar(String nazov, Category category, Prevadzka prevadzka, int mnozstvo) {
         this.nazov = nazov;
@@ -46,6 +53,14 @@ public class Tovar {
         this.mnozstvo = mnozstvo;
     }
 
+    public void znizMnozstvo(int mnozstvo) {
+        this.mnozstvo = this.mnozstvo - mnozstvo;
+    }
+
+    public void zvysMnozstvo(int mnozstvo) {
+        this.mnozstvo = this.mnozstvo + mnozstvo;
+    }
+
 
     public Category getCategory() {
         return category;
@@ -63,6 +78,13 @@ public class Tovar {
         this.nazov = nazov;
     }
 
+    public Prevadzka getPrevadzka() {
+        return prevadzka;
+    }
+
+    public void setPrevadzka(Prevadzka prevadzka) {
+        this.prevadzka = prevadzka;
+    }
 
     @Override
     public boolean equals(Object o) {

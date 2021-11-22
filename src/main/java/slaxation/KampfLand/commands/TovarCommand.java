@@ -6,21 +6,28 @@ import slaxation.KampfLand.domain.Prevadzka;
 public class TovarCommand {
 
 
-    private Long id;
+    private int id;
     private String nazov;
     private Category category;
-    private Prevadzka prevadzkaId;
+    private Prevadzka prevadzka;
     private int mnozstvo;
 
     public TovarCommand(){
-
     }
 
-    public Long getId() {
+    public TovarCommand(int id, String nazov, Category category, Prevadzka prevadzka, int mnozstvo) {
+        this.id = id;
+        this.nazov = nazov;
+        this.category = category;
+        this.prevadzka = prevadzka;
+        this.mnozstvo = mnozstvo;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -40,12 +47,12 @@ public class TovarCommand {
         this.category = category;
     }
 
-    public Prevadzka getPrevadzkaId() {
-        return prevadzkaId;
+    public Prevadzka getPrevadzka() {
+        return prevadzka;
     }
 
-    public void setPrevadzkaId(Prevadzka prevadzkaId) {
-        this.prevadzkaId = prevadzkaId;
+    public void setPrevadzka(Prevadzka prevadzka) {
+        this.prevadzka = prevadzka;
     }
 
     public int getMnozstvo() {
