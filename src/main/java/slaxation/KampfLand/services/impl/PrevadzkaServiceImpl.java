@@ -70,7 +70,7 @@ public class PrevadzkaServiceImpl implements PrevadzkaService {
     public PrevadzkaCommand vytvorPrevadzku(PrevadzkaCommand prevadzkaCommand) {
 
         Optional<Prevadzka> prevadzkaOptional = prevadzkaRepository.findById(prevadzkaCommand.getPrevid());
-        
+
 
         if (!prevadzkaOptional.isPresent()) {
             PrevadzkaCommand novaPrevadzka = new PrevadzkaCommand();
