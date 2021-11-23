@@ -1,17 +1,22 @@
 package slaxation.KampfLand.services.impl;
 
-import org.springframework.data.domain.Example;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import slaxation.KampfLand.exceptions.NotEnoughException;
 import slaxation.KampfLand.commands.TovarCommand;
 import slaxation.KampfLand.converters.TovarConverter;
 import slaxation.KampfLand.domain.Tovar;
+import slaxation.KampfLand.exceptions.NotFoundException;
 import slaxation.KampfLand.repositories.TovarRepository;
 import slaxation.KampfLand.services.TovarService;
 
+
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+
 
 @Service
 public class TovarServiceImpl implements TovarService {
@@ -24,42 +29,74 @@ public class TovarServiceImpl implements TovarService {
         this.tovarConverter = tovarConverter;
     }
 
+    @Override
+    public Set<TovarCommand> getTovaryCommandByPrevId(Integer prevId) {
+        Set<Tovar> tovary = new HashSet<>();
+        tovarRepository.findAll().iterator().forEachRemaining(tovary::add);
 
-    @Transactional
-    public void znizMnozstvoTovaru(TovarCommand command, int mnozstvo) {
-
-        Tovar tovar = tovarConverter.TovarCommandToTovar(command);
-
-        try {
-            if (tovarRepository.exists(Example.of(tovar))) {
-                tovarRepository.findById(command.getId())
-                        .get()
-                        .znizMnozstvo(mnozstvo);
-            } else {
-                throw new NotEnoughException("Tovar neexistuje");
+        Set<TovarCommand> tovaryPrevadzky = new HashSet<>();
+        for (Tovar tovar : tovary) {
+            if(prevId.equals(tovar.getPrevadzka().getPrevid())){
+                tovaryPrevadzky.add(tovarConverter.TovarToTovarCommand(tovar));
             }
-        } catch (NotEnoughException e) {
-            throw new NotEnoughException("Nedostatok mnozstva na sklade");
         }
 
+        return tovaryPrevadzky;
     }
 
-    @Transactional
-    public void zvysMnozstvoTovaru(TovarCommand command, int mnozstvo) {
 
-        Tovar tovar = tovarConverter.TovarCommandToTovar(command);
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public TovarCommand znizMnozstvoTovaru(TovarCommand command, int mnozstvo) {
 
-        if (tovarRepository.exists(Example.of(tovar))) {
-            tovarRepository.findById(command.getId())
-                    .get()
-                    .zvysMnozstvo(mnozstvo);
+        Optional<Tovar> tovarOptional = tovarRepository.findById(command.getId());
+
+
+
+        if (!tovarOptional.isPresent()) {
+            throw new NotFoundException("Tovar nie je na sklade");
+        }
+
+        Tovar tovar = tovarOptional.get();
+
+            try {
+                tovarRepository.getById(tovar.getId())
+                        .znizMnozstvo(mnozstvo);
+
+            } catch (NotEnoughException e) {
+                throw new NotEnoughException("Nedostatok mnozstva na sklade");
+            }
+        return tovarConverter.TovarToTovarCommand(tovar);
+        }
+
+
+
+
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public TovarCommand saveTovarCommand(TovarCommand command) {
+
+        Optional<Tovar> tovarOptional = tovarRepository.findById(command.getId());
+
+
+        if (!tovarOptional.isPresent()) {
+
+            TovarCommand novyTovar = new TovarCommand();
+            novyTovar.setId(command.getId());
+            novyTovar.setNazov(command.getNazov());
+            novyTovar.setCategory(command.getCategory());
+            novyTovar.setPrevadzka(command.getPrevadzka());
+            novyTovar.setMnozstvo(command.getMnozstvo());
+            return novyTovar;
+
         } else {
+            Tovar tovar = tovarOptional.get();
+            tovarRepository.getById(tovar.getId())
+                    .zvysMnozstvo(tovar.getMnozstvo());
 
-            tovar.setMnozstvo(mnozstvo);
-            tovarRepository.save(tovar);
+            return tovarConverter.TovarToTovarCommand(tovar);
         }
     }
-
 
 
 }

@@ -1,5 +1,7 @@
 package slaxation.KampfLand.services;
 
+import slaxation.KampfLand.commands.ObchodCommand;
+import slaxation.KampfLand.commands.PrevadzkaCommand;
 import slaxation.KampfLand.domain.Obchod;
 import slaxation.KampfLand.domain.Prevadzka;
 
@@ -7,5 +9,7 @@ import java.util.Set;
 
 public interface ObchodService {
 
-    Set<Prevadzka> getPrevadzkyByObchodId(Integer obchodId);
+    Set<ObchodCommand> getObchodyCommand();
+
+    Set<PrevadzkaCommand> getPrevadzkyCommandByObchodId(Integer obchodId);
 }

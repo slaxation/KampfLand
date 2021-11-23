@@ -8,11 +8,11 @@ import java.util.Set;
 
 public interface TovarService {
 
+    Set<TovarCommand> getTovaryCommandByPrevId(Integer previd);
 
-    void znizMnozstvoTovaru(TovarCommand command, int mnozstvo) throws NotEnoughException;
+    TovarCommand znizMnozstvoTovaru(TovarCommand command, int mnozstvo) throws NotEnoughException;
 
-    void zvysMnozstvoTovaru(TovarCommand command, int mnozstvo);
-
+    TovarCommand saveTovarCommand(TovarCommand command);
 
 
 

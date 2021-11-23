@@ -1,13 +1,24 @@
 package slaxation.KampfLand.services;
 
+import slaxation.KampfLand.commands.PrevadzkaCommand;
 import slaxation.KampfLand.domain.Prevadzka;
-import slaxation.KampfLand.domain.Tovar;
 
 import java.util.Set;
 
 public interface PrevadzkaService {
 
-    Set<Tovar> getTovaryByPrevId(Integer previd);
+    Set<PrevadzkaCommand> getPrevadzkyCommand();
+
+
+
+    Prevadzka findById(Integer id);
+
+    PrevadzkaCommand findCommandById(Integer i);
+
+    void vymazPrevadzku(Integer i);
+
+    PrevadzkaCommand vytvorPrevadzku(PrevadzkaCommand prevadzkaCommand);
+
 
 
 }
