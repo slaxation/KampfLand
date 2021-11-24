@@ -2,6 +2,7 @@ package slaxation.KampfLand.domain;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,12 +23,14 @@ public class Prevadzka {
     @Column(name = "zatv_hodiny", columnDefinition = "TIME default '00:00:00'")
     private Time zatvHodiny;
 
+
     @ManyToOne
     @JoinColumn(name = "obchod_id", nullable = false)
     private Obchod obchod;
 
-    @OneToMany(mappedBy = "prevadzka")
-    private Set<Tovar> tovary;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prevadzka")
+    private Set<Tovar> tovary = new HashSet<>();
 
 
     public Prevadzka(){
@@ -42,31 +45,7 @@ public class Prevadzka {
         this.tovary = tovary;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Prevadzka prevadzka = (Prevadzka) o;
-
-        if (previd != prevadzka.previd) return false;
-        if (adresa != null ? !adresa.equals(prevadzka.adresa) : prevadzka.adresa != null) return false;
-        if (otvHodiny != null ? !otvHodiny.equals(prevadzka.otvHodiny) : prevadzka.otvHodiny != null) return false;
-        if (zatvHodiny != null ? !zatvHodiny.equals(prevadzka.zatvHodiny) : prevadzka.zatvHodiny != null) return false;
-        if (obchod != null ? !obchod.equals(prevadzka.obchod) : prevadzka.obchod != null) return false;
-        return tovary != null ? tovary.equals(prevadzka.tovary) : prevadzka.tovary == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = previd;
-        result = 31 * result + (adresa != null ? adresa.hashCode() : 0);
-        result = 31 * result + (otvHodiny != null ? otvHodiny.hashCode() : 0);
-        result = 31 * result + (zatvHodiny != null ? zatvHodiny.hashCode() : 0);
-        result = 31 * result + (obchod != null ? obchod.hashCode() : 0);
-        result = 31 * result + (tovary != null ? tovary.hashCode() : 0);
-        return result;
-    }
 
     public int getPrevid() {
         return previd;

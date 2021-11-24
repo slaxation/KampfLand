@@ -9,17 +9,17 @@ public class TovarCommand {
     private int id;
     private String nazov;
     private Category category;
-    private Prevadzka prevadzka;
+    private Integer prevadzkaId;
     private int mnozstvo;
 
     public TovarCommand(){
     }
 
-    public TovarCommand(int id, String nazov, Category category, Prevadzka prevadzka, int mnozstvo) {
+    public TovarCommand(int id, String nazov, Category category, Integer prevadzka, int mnozstvo) {
         this.id = id;
         this.nazov = nazov;
         this.category = category;
-        this.prevadzka = prevadzka;
+        this.prevadzkaId = prevadzka;
         this.mnozstvo = mnozstvo;
     }
 
@@ -47,12 +47,12 @@ public class TovarCommand {
         this.category = category;
     }
 
-    public Prevadzka getPrevadzka() {
-        return prevadzka;
+    public Integer getPrevId() {
+        return prevadzkaId;
     }
 
-    public void setPrevadzka(Prevadzka prevadzka) {
-        this.prevadzka = prevadzka;
+    public void setPrevId(Integer prevadzka) {
+        this.prevadzkaId = prevadzka;
     }
 
     public int getMnozstvo() {

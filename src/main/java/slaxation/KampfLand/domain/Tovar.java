@@ -86,27 +86,5 @@ public class Tovar {
         this.prevadzka = prevadzka;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Tovar tovar = (Tovar) o;
-
-        if (id != tovar.id) return false;
-        if (mnozstvo != tovar.mnozstvo) return false;
-        if (nazov != null ? !nazov.equals(tovar.nazov) : tovar.nazov != null) return false;
-        if (category != tovar.category) return false;
-        return prevadzka != null ? prevadzka.equals(tovar.prevadzka) : tovar.prevadzka == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (nazov != null ? nazov.hashCode() : 0);
-        result = 31 * result + (category != null ? category.hashCode() : 0);
-        result = 31 * result + (prevadzka != null ? prevadzka.hashCode() : 0);
-        result = 31 * result + mnozstvo;
-        return result;
-    }
 }

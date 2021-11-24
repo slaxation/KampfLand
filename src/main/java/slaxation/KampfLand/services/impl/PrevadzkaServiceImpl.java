@@ -4,11 +4,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import slaxation.KampfLand.commands.PrevadzkaCommand;
-import slaxation.KampfLand.commands.TovarCommand;
-import slaxation.KampfLand.converters.PrevadzkaConverter;
+import slaxation.KampfLand.converters.PrevadzkaCommandToPrevadzka;
+import slaxation.KampfLand.converters.PrevadzkaToPrevadzkaCommand;
 import slaxation.KampfLand.converters.TovarConverter;
 import slaxation.KampfLand.domain.Prevadzka;
-import slaxation.KampfLand.domain.Tovar;
 import slaxation.KampfLand.exceptions.AlreadyExistsException;
 import slaxation.KampfLand.exceptions.NotFoundException;
 import slaxation.KampfLand.repositories.PrevadzkaRepository;
@@ -24,10 +23,10 @@ public class PrevadzkaServiceImpl implements PrevadzkaService {
 
     private final TovarRepository tovarRepository;
     private final PrevadzkaRepository prevadzkaRepository;
-    private final PrevadzkaConverter prevadzkaConverter;
+    private final PrevadzkaToPrevadzkaCommand prevadzkaConverter;
     private final TovarConverter tovarConverter;
 
-    public PrevadzkaServiceImpl(TovarRepository tovarRepository, PrevadzkaRepository prevadzkaRepository, PrevadzkaConverter prevadzkaConverter, TovarConverter tovarConverter) {
+    public PrevadzkaServiceImpl(TovarRepository tovarRepository, PrevadzkaRepository prevadzkaRepository, PrevadzkaToPrevadzkaCommand prevadzkaConverter, TovarConverter tovarConverter) {
         this.tovarRepository = tovarRepository;
         this.prevadzkaRepository = prevadzkaRepository;
         this.prevadzkaConverter = prevadzkaConverter;
@@ -78,7 +77,7 @@ public class PrevadzkaServiceImpl implements PrevadzkaService {
             novaPrevadzka.setAdresa(prevadzkaCommand.getAdresa());
             novaPrevadzka.setOtvHodiny(prevadzkaCommand.getOtvHodiny());
             novaPrevadzka.setZatvHodiny(prevadzkaCommand.getZatvHodiny());
-            novaPrevadzka.setObchod(prevadzkaCommand.getObchod());
+            novaPrevadzka.setObchodId(prevadzkaCommand.getObchod());
             novaPrevadzka.setTovary(prevadzkaCommand.getTovary());
 
             return novaPrevadzka;

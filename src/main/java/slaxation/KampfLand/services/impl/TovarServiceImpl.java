@@ -85,7 +85,7 @@ public class TovarServiceImpl implements TovarService {
             novyTovar.setId(command.getId());
             novyTovar.setNazov(command.getNazov());
             novyTovar.setCategory(command.getCategory());
-            novyTovar.setPrevadzka(command.getPrevadzka());
+            novyTovar.setPrevId(command.getPrevId());
             novyTovar.setMnozstvo(command.getMnozstvo());
             return novyTovar;
 

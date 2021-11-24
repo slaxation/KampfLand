@@ -1,6 +1,7 @@
 package slaxation.KampfLand.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,10 +15,11 @@ public class Obchod {
     @Column(name = "nazov_obchodu")
     private String nazov;
 
-    @OneToMany(mappedBy = "obchod")
-    private Set<Prevadzka> prevadzky;
+    @Transient
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "obchod")
+    private Set<Prevadzka> prevadzky = new HashSet<>();
 
-    public Obchod(){
+    public Obchod() {
     }
 
     public Obchod(String nazov, Set<Prevadzka> prevadzky) {
@@ -42,8 +44,6 @@ public class Obchod {
     }
 
 
-
-
     public Set<Prevadzka> getPrevadzky() {
         return prevadzky;
     }
@@ -51,24 +51,6 @@ public class Obchod {
     public void setPrevadzky(Set<Prevadzka> prevadzky) {
         this.prevadzky = prevadzky;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Obchod obchod = (Obchod) o;
-
-        if (obchod_id != obchod.obchod_id) return false;
-        if (nazov != null ? !nazov.equals(obchod.nazov) : obchod.nazov != null) return false;
-        return prevadzky != null ? prevadzky.equals(obchod.prevadzky) : obchod.prevadzky == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = obchod_id;
-        result = 31 * result + (nazov != null ? nazov.hashCode() : 0);
-        result = 31 * result + (prevadzky != null ? prevadzky.hashCode() : 0);
-        return result;
-    }
 }
+
+

@@ -3,8 +3,8 @@ package slaxation.KampfLand.services.impl;
 import org.springframework.stereotype.Service;
 import slaxation.KampfLand.commands.ObchodCommand;
 import slaxation.KampfLand.commands.PrevadzkaCommand;
-import slaxation.KampfLand.converters.ObchodConverter;
-import slaxation.KampfLand.converters.PrevadzkaConverter;
+import slaxation.KampfLand.converters.ObchodToObchodCommand;
+import slaxation.KampfLand.converters.PrevadzkaToPrevadzkaCommand;
 import slaxation.KampfLand.domain.Obchod;
 import slaxation.KampfLand.domain.Prevadzka;
 import slaxation.KampfLand.repositories.ObchodRepository;
@@ -18,26 +18,25 @@ import java.util.Set;
 public class ObchodServiceImpl implements ObchodService {
 
     private final ObchodRepository obchodRepository;
-    private final ObchodConverter obchodConverter;
     private final PrevadzkaRepository prevadzkaRepository;
-    private final PrevadzkaConverter prevadzkaConverter;
+    private final PrevadzkaToPrevadzkaCommand prevadzkaConverter;
+    private final ObchodToObchodCommand obchodConverter;
 
-    public ObchodServiceImpl(ObchodRepository obchodRepository, ObchodConverter obchodConverter, PrevadzkaRepository prevadzkaRepository, PrevadzkaConverter prevadzkaConverter) {
+    public ObchodServiceImpl(ObchodRepository obchodRepository, PrevadzkaRepository prevadzkaRepository, PrevadzkaToPrevadzkaCommand prevadzkaConverter, ObchodToObchodCommand obchodConverter) {
         this.obchodRepository = obchodRepository;
-        this.obchodConverter = obchodConverter;
         this.prevadzkaRepository = prevadzkaRepository;
         this.prevadzkaConverter = prevadzkaConverter;
+        this.obchodConverter = obchodConverter;
     }
 
 
     @Override
-    public Set<ObchodCommand> getObchodyCommand() {
+    public Set<ObchodCommand> getObchody() {
         Set<Obchod> obchody = new HashSet<>();
         obchodRepository.findAll().iterator().forEachRemaining(obchody::add);
 
         Set<ObchodCommand> prevadzkyObchodu = new HashSet<>();
         for (Obchod obchod : obchody) {
-
             prevadzkyObchodu.add(obchodConverter.obchodToObchodCommand(obchod));
             }
 

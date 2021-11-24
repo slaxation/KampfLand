@@ -11,8 +11,10 @@ import slaxation.KampfLand.exceptions.NotEnoughException;
 import slaxation.KampfLand.exceptions.NotFoundException;
 import slaxation.KampfLand.services.TovarService;
 
+import java.util.Set;
 
-@Controller
+
+@RestController
 public class TovarController {
 
     private final TovarService tovarService;
@@ -22,25 +24,24 @@ public class TovarController {
     }
 
     @GetMapping("/prevadzka/{prevId}/tovary")
-    public String listTovaryByPrevId(@PathVariable String prevId, Model model){
+    public Set<TovarCommand> listTovaryByPrevId(@PathVariable String prevId, Model model){
 
-       model.addAttribute("prevadzka", tovarService.getTovaryCommandByPrevId(Integer.valueOf(prevId)));
+       return tovarService.getTovaryCommandByPrevId(Integer.valueOf(prevId));
 
-       return "prevadzka/tovary";
     }
 
-    @PostMapping("/prevadzka/{previd}/tovar/update")
+    @PostMapping("/prevadzka/tovar/update")
     public String saveOrIncreaseAmount(@ModelAttribute TovarCommand command) {
         TovarCommand savedCommand = tovarService.saveTovarCommand(command);
 
-        return "redirect:/prevadzka/" + savedCommand.getPrevadzka().getPrevid() + "/tovary";
+        return "redirect:/prevadzka/" + savedCommand.getPrevId() + "/tovary";
     }
 
-    @PostMapping("/prevadzka/{previd}/tovar/znizenie")
+    @PostMapping("/prevadzka/tovar/znizenie")
     public String decreaseAmount(@ModelAttribute TovarCommand command) {
         TovarCommand savedCommand = tovarService.znizMnozstvoTovaru(command, command.getMnozstvo());
 
-        return "redirect:/prevadzka/" + savedCommand.getPrevadzka().getPrevid() + "/tovary";
+        return "redirect:/prevadzka/" + savedCommand.getPrevId() + "/tovary";
 
     }
 

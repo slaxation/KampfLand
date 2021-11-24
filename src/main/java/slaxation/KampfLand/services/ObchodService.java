@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface ObchodService {
 
-    Set<ObchodCommand> getObchodyCommand();
+    Set<ObchodCommand> getObchody();
 
     Set<PrevadzkaCommand> getPrevadzkyCommandByObchodId(Integer obchodId);
 }

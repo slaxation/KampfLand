@@ -9,8 +9,6 @@ public interface PrevadzkaService {
 
     Set<PrevadzkaCommand> getPrevadzkyCommand();
 
-
-
     Prevadzka findById(Integer id);
 
     PrevadzkaCommand findCommandById(Integer i);

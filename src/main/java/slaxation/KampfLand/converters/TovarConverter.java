@@ -19,7 +19,7 @@ public class TovarConverter {
         tovarCommand.setId(tovar.getId());
         tovarCommand.setNazov(tovar.getNazov());
         tovarCommand.setCategory(tovar.getCategory());
-        tovarCommand.setPrevadzka(tovar.getPrevadzka());
+        tovarCommand.setPrevId(tovar.getPrevadzka().getPrevid());
         tovarCommand.setMnozstvo(tovar.getMnozstvo());
 
         return tovarCommand;
@@ -37,7 +37,6 @@ public class TovarConverter {
         Tovar tovar = new Tovar();
         tovar.setNazov(tovarCommand.getNazov());
         tovar.setCategory(tovarCommand.getCategory());
-        tovar.setPrevadzka(tovarCommand.getPrevadzka());
         tovar.setMnozstvo(tovarCommand.getMnozstvo());
 
         return tovar;

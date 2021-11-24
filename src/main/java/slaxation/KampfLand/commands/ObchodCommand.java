@@ -1,7 +1,9 @@
 package slaxation.KampfLand.commands;
 
-import slaxation.KampfLand.domain.Prevadzka;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Transient;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,6 +11,8 @@ public class ObchodCommand {
 
     private int obchod_id;
     private String nazov;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<PrevadzkaCommand> prevadzky = new HashSet<>();
 
     public ObchodCommand() {
@@ -36,13 +40,17 @@ public class ObchodCommand {
         this.nazov = nazov;
     }
 
+
     public Set<PrevadzkaCommand> getPrevadzky() {
         return prevadzky;
     }
 
+
     public void setPrevadzky(Set<PrevadzkaCommand> prevadzky) {
         this.prevadzky = prevadzky;
     }
+
+
 }
 
 

@@ -1,5 +1,7 @@
 package slaxation.KampfLand.commands;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import slaxation.KampfLand.domain.Obchod;
 
 import java.sql.Time;
@@ -12,7 +14,9 @@ public class PrevadzkaCommand {
     private String adresa;
     private Time otvHodiny;
     private Time zatvHodiny;
-    private Obchod obchod;
+    private Integer obchodId;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<TovarCommand> tovary = new HashSet<>();
 
 
@@ -20,12 +24,12 @@ public class PrevadzkaCommand {
 
     }
 
-    public PrevadzkaCommand(int previd, String adresa, Time otvHodiny, Time zatvHodiny, Obchod obchod, Set<TovarCommand> tovary) {
+    public PrevadzkaCommand(int previd, String adresa, Time otvHodiny, Time zatvHodiny, Integer obchodId, Set<TovarCommand> tovary) {
         this.previd = previd;
         this.adresa = adresa;
         this.otvHodiny = otvHodiny;
         this.zatvHodiny = zatvHodiny;
-        this.obchod = obchod;
+        this.obchodId = obchodId;
         this.tovary = tovary;
     }
 
@@ -62,12 +66,12 @@ public class PrevadzkaCommand {
     }
 
 
-    public Obchod getObchod() {
-        return obchod;
+    public Integer getObchod() {
+        return obchodId;
     }
 
-    public void setObchod(Obchod obchod) {
-        this.obchod = obchod;
+    public void setObchodId(Integer obchod) {
+        this.obchodId = obchod;
     }
 
     public Set<TovarCommand> getTovary() {
@@ -77,5 +81,7 @@ public class PrevadzkaCommand {
     public void setTovary(Set<TovarCommand> tovary) {
         this.tovary = tovary;
     }
+
+
 
 }

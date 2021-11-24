@@ -4,9 +4,14 @@ package slaxation.KampfLand.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import slaxation.KampfLand.commands.ObchodCommand;
+import slaxation.KampfLand.domain.Obchod;
 import slaxation.KampfLand.services.ObchodService;
 
-@Controller
+import java.util.Set;
+
+@RestController
 public class IndexController {
 
     private final ObchodService obchodService;
@@ -16,10 +21,10 @@ public class IndexController {
     }
 
     @RequestMapping({"", "/", "/index"})
-    public String getIndexPage(Model model) {
+    public Set<ObchodCommand> getIndexPage() {
 
-        model.addAttribute("obchody", obchodService.getObchodyCommand());
+        return obchodService.getObchody();
 
-        return "index";
+
     }
 }

@@ -1,6 +1,9 @@
+
+
  CREATE TABLE IF NOT EXISTS obchod(
   obchod_id SERIAL PRIMARY KEY,
   nazov_obchodu VARCHAR(255)
+
 
 );
  CREATE TABLE IF NOT EXISTS prevadzka (
@@ -17,8 +20,8 @@ CREATE TABLE IF NOT EXISTS tovar (
   tovar_id SERIAL PRIMARY KEY,
   nazov VARCHAR(255),
   category VARCHAR(255),
-  prevadzka_id INTEGER REFERENCES prevadzka (prev_id)
-
+  prev_id INTEGER REFERENCES prevadzka (prev_id),
+  mnozstvo INTEGER
 
 );
 
